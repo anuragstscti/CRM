@@ -51,6 +51,12 @@ builder.Services.AddCors(options =>
         });
 });
 
+// Configure SPA static files
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "Frontend/dist";
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -67,13 +73,29 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
+app.UseSpaStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints?.MapControllers();
+});
+
+// Configure SPA
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "Frontend";
+    if (app.Environment.IsDevelopment())
+    {
+        spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+    }
+});
 
 app.MapControllers();
 
