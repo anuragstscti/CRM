@@ -23,32 +23,40 @@ namespace CRM.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            var appuserID = _db.ApplicationUsers.OrderByDescending(x => x.AppUserID).Select(x => x.AppUserID).FirstOrDefault();
-            appuserID = (appuserID == null || appuserID == 0) ? 1 : appuserID + 1;
+            if (model == null || string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Password))
+                return BadRequest("Invalid input data.");
+
+            var appUserId = _db.ApplicationUsers
+                .OrderByDescending(x => x.AppUserID)
+                .Select(x => x.AppUserID)
+                .DefaultIfEmpty(0)
+                .First() + 1;
+
             var user = new ApplicationUser
             {
                 UserName = model.Email,
                 Email = model.Email,
                 CreatedBy = TrackUser.AppUserID(),
                 CreatedDateTime = DateTimeOffset.Now,
-                AppUserID = appuserID
+                AppUserID = appUserId
             };
 
-            var roleExists = await _roleManager.RoleExistsAsync(RoleName.User);
-            if (!roleExists)
-                return NotFound("Role not found.");
+            if (!await _roleManager.RoleExistsAsync(RoleName.User))
+                return NotFound("The specified role does not exist.");
 
             var result = await _userManager.CreateAsync(user, model.Password);
-
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
 
-            user = await _userManager.FindByEmailAsync(model.Email);
+            var roleResult = await _userManager.AddToRoleAsync(user, RoleName.User);
+            if (!roleResult.Succeeded)
+                return BadRequest(roleResult.Errors);
 
-            await _userManager.AddToRoleAsync(user, RoleName.User);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
+
             return Ok("User created successfully.");
         }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
