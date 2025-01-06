@@ -11,4 +11,10 @@
         public string Email { get; set; }
         public string Password { get; set; }
     }
+    public class UserRoleModel
+    {
+        public string Email { get; set; }
+        public string RoleName { get; set; }
+    }
+
 }

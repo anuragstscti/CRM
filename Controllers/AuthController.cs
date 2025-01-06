@@ -13,9 +13,10 @@ namespace CRM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration, ApplicationDBContext db) : ControllerBase
+    public class AuthController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, ApplicationDBContext db) : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager = userManager;
+        private readonly RoleManager<IdentityRole> _roleManager = roleManager;
         private readonly IConfiguration _configuration = configuration;
         private readonly ApplicationDBContext _db = db;
 
@@ -32,11 +33,19 @@ namespace CRM.Controllers
                 CreatedDateTime = DateTimeOffset.Now,
                 AppUserID = appuserID
             };
+
+            var roleExists = await _roleManager.RoleExistsAsync(RoleName.User);
+            if (!roleExists)
+                return NotFound("Role not found.");
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
 
+            user = await _userManager.FindByEmailAsync(model.Email);
+
+            await _userManager.AddToRoleAsync(user, RoleName.User);
             _db.SaveChanges();
             return Ok("User created successfully.");
         }
@@ -48,6 +57,8 @@ namespace CRM.Controllers
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
                 return Unauthorized("Invalid credentials");
+
+            var roles = await _userManager.GetRolesAsync(user);
 
             var authClaims = new List<Claim>
             {
@@ -65,7 +76,72 @@ namespace CRM.Controllers
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
             );
-            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+            var res = new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                roles
+            };
+            return Ok(res);
+        }
+
+        [HttpPost("create-role")]
+        public async Task<IActionResult> CreateRole([FromBody] string roleName)
+        {
+            if (string.IsNullOrEmpty(roleName))
+                return BadRequest("Role name cannot be empty.");
+
+            var roleExists = await _roleManager.RoleExistsAsync(roleName);
+            if (roleExists)
+                return BadRequest("Role already exists.");
+
+            var result = await _roleManager.CreateAsync(new IdentityRole(roleName));
+            if (result.Succeeded)
+                return Ok(new { Message = "Role created successfully!" });
+
+            return BadRequest(result.Errors);
+        }
+
+        [HttpPost("assign-role")]
+        public async Task<IActionResult> AssignRole([FromBody] UserRoleModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+                return NotFound("User not found.");
+
+            var roleExists = await _roleManager.RoleExistsAsync(model.RoleName);
+            if (!roleExists)
+                return NotFound("Role not found.");
+
+            var result = await _userManager.AddToRoleAsync(user, model.RoleName);
+            if (result.Succeeded)
+                return Ok(new { Message = "Role assigned to user successfully!" });
+
+            return BadRequest(result.Errors);
+        }
+
+        [HttpPost("remove-role")]
+        public async Task<IActionResult> RemoveRole([FromBody] UserRoleModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+                return NotFound("User not found.");
+
+            var result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
+            if (result.Succeeded)
+                return Ok(new { Message = "Role removed from user successfully!" });
+
+            return BadRequest(result.Errors);
+        }
+
+        [HttpGet("user-roles/{email}")]
+        public async Task<IActionResult> GetUserRoles(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                return NotFound("User not found.");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            return Ok(roles);
         }
 
     }
