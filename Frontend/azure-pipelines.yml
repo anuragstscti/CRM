@@ -1,0 +1,23 @@
+trigger:
+- main  
+
+pool:
+  name: 'default'
+  demands:
+  - Agent.Name -equals GTC-VM-022
+
+steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "Deployment Start"
+      pwd
+      cd QED
+      npm i 
+      pm2 delete QED
+      pm2 save 
+      pm2 start "ng serve" --name QED
+      pm2 save
+      pm2 status
+      echo "Deployment Done"

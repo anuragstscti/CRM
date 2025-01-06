@@ -1,0 +1,43 @@
+// STYLE LOGIN POPUP START
+::ng-deep .mdc-dialog--open .mat-mdc-dialog-surface, .mdc-dialog--closing .mat-mdc-dialog-surface {
+    overflow: hidden !important;
+}
+// STYLE LOGIN POPUP END
+
+
+.sidenav-container {
+    height: 100%;
+    display: flex;
+  }
+  
+  mat-sidenav {
+    width: 250px;
+  }
+  
+  mat-sidenav-content {
+    flex: 1;
+    padding: 16px;
+  }
+  
+  .active-link {
+    font-weight: bold;
+    color: #1976d2;
+  }
+  .sidenav-header{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+  }
+  
+  .header-font{
+    font-weight: 700;
+  }
+  
+  .content-container{
+    height: 90vh;
+  }
+  
+  .example-container2{
+    height: 88vh;
+    margin-top:70px
+  }

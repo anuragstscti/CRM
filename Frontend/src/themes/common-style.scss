@@ -1,0 +1,64 @@
+::ng-deep mat-form-field {
+    mat-icon {
+      padding: 0px !important;
+      height: 20px !important;
+      width: 20px !important;
+      font-size: 20px !important;
+    }
+  
+    .mat-mdc-form-field-infix {
+      min-height: 30px !important;
+      padding-top: 6px !important;
+      padding-bottom: 6px !important;
+    }
+  
+    .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+      top: 25px !important;
+      margin-bottom: 0px !important;
+    }
+  
+    mat-label {
+      font-size: 14px !important;
+    }
+    input {
+      font-size: 14px !important;
+    }
+    .mat-mdc-select-min-line {
+      font-size: 14px !important;
+    }
+    .mat-mdc-icon-button.mat-mdc-button-base {
+      width: 35px !important;
+      height: 35px !important;
+      padding: 0px !important;
+    }
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: rgb(153 153 153 / 38%) !important;
+    }
+    .mdc-text-field--invalid {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: #f44336 !important;
+      }
+    }
+    mat-select{
+      mat-option{
+        min-height: 25px !important;
+      }
+    }
+    .mat-mdc-floating-label.mdc-floating-label {
+      line-height: 20px !important;
+      height: 36px !important;
+    }
+    .mat-mdc-form-field-icon-suffix{
+      mat-icon{
+        height: 20px !important;
+        width: 20px !important;
+        font-size: 20px !important;
+        line-height: initial !important;
+      }
+    }
+  }
+  

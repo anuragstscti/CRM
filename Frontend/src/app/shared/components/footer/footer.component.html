@@ -1,0 +1,25 @@
+<mat-toolbar class="mat-footer-toolbar">
+  <mat-nav-list class="mini-nav-footer">
+    <div class="left-nav">
+      <mat-list-item *ngFor="let navItem of navigationList">
+        <button *ngIf="navItem.childRoute.length<1" mat-icon-button routerLinkActive="activebutton" class="list-menu"
+          [routerLink]="navItem.route">
+          <fa-icon class="mat-icon" [icon]="navItem.icon" [matTooltip]="navItem.name"
+            matTooltipPosition="right"></fa-icon>
+        </button>
+        <button *ngIf="navItem.childRoute.length>0" mat-icon-button [matMenuTriggerFor]="menu"
+          routerLinkActive="activebutton" class="list-menu">
+          <fa-icon class="mat-icon" [icon]="navItem.icon" [matTooltip]="navItem.name"
+            matTooltipPosition="right"></fa-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let item of navItem.childRoute" [routerLink]="item.route">
+            <fa-icon class="mat-icon" [icon]="item.icon" [matTooltip]="item.name"
+              matTooltipPosition="right"></fa-icon>
+            <span>{{item.name}}</span>
+          </button>
+        </mat-menu>
+      </mat-list-item>
+    </div>
+  </mat-nav-list>
+</mat-toolbar>

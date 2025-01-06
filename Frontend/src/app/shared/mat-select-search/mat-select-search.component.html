@@ -1,0 +1,22 @@
+<div [formGroup]="form">
+  <mat-form-field class="custom-comment-field" appearance="outline">
+    <mat-label>{{label}}</mat-label>
+    <mat-select [formControlName]="control" (selectionChange)="onSelectionChange($event)" [placeholder]="placeholder">
+      <mat-option class="custom-option">
+        <ngx-mat-select-search [formControl]="searchControl" [placeholderLabel]="searchPlaceholder"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngIf="filteredOptions.length === 0" disabled>
+        No data found
+      </mat-option>
+      <mat-option *ngFor="let option of filteredOptions" [value]="option[keys[1]]">
+        {{ option[keys[1]] }}
+      </mat-option>
+    </mat-select>
+    <button class="close-icon-btn" *ngIf="form.controls[control].value" matSuffix
+            (click)="clearSelection(); $event.stopPropagation();">
+      <mat-icon class="mat-icon-inline" matSuffix>clear</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+

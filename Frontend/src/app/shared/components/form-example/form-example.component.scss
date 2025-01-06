@@ -1,0 +1,19 @@
+mat-form-field {
+    display: flex;
+}
+
+form {
+    .form-group {
+        display: flex;
+        justify-content: space-around;
+
+        .input-field {
+            width: 50%;
+        }
+    }
+
+    .form-action-btn {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

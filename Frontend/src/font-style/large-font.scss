@@ -1,0 +1,129 @@
+body.large-font-size {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span {
+        font-size: 30px !important;
+    }
+
+    mat-label {
+        font-size: 26px !important;
+    }
+
+    input {
+        font-size: 30px !important;
+    }
+
+    mat-form-field {
+        mat-icon {
+            font-size: 30px !important;
+        }
+
+        .mat-mdc-select-min-line {
+            font-size: 27px !important;
+        }
+
+        .mat-mdc-form-field-icon-suffix {
+            mat-icon {
+                font-size: 30px !important;
+            }
+        }
+        mat-label {
+            font-size: 24px !important;
+        }
+    }
+
+    mat-slide-toggle {
+        .mdc-label {
+            font-size: 31px !important;
+        }
+    }
+
+    table {
+
+        mat-mdc-header-cell,
+        th {
+            font-size: 30px !important;
+            line-height: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        mat-mdc-cell,
+        td {
+            font-size: 28px !important;
+            line-height: 29px;
+        }
+    }
+
+    ul {
+        li {
+            font-size: 28px !important;
+            line-height: 35px;
+        }
+    }
+
+    .hyperlink-field {
+        .hyperlink-label {
+            font-size: 30px !important;
+            top: -20px;
+            line-height: 35px;
+        }
+
+        .hyperlink {
+            font-size: 20px;
+        }
+    }
+
+    .mat-drawer-content mat-paginator {
+        font-size: 23px !important;
+    }
+
+    mat-checkbox .mdc-form-field label {
+        font-size: 20px !important;
+        font-weight: 500;
+    }
+
+    mat-radio-button .mdc-form-field label {
+        font-size: 20px !important;
+        font-weight: 500;
+    }
+
+    .mat-mdc-raised-button>.mat-icon,
+    .mat-mdc-outlined-button>.mat-icon {
+        font-size: 2.125rem;
+        height: 2.125rem;
+        width: 2.125rem;
+    }
+
+    .login-form {
+        height: 320px;
+    }
+
+    @media (min-width: 992px) {
+        .col-lg-4 {
+            flex: 0 0 auto;
+            width: 33.333333333333336%
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .col-xl-4 {
+            flex: 0 0 auto;
+            width: 33.333333333333336%;
+        }
+    }
+
+    .mat-mdc-option {
+        padding: 0 1px !important;
+    }
+    .panel-button{
+        font-size: 28px;
+    }
+}
+

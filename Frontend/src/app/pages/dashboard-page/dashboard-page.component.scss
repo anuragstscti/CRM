@@ -1,0 +1,184 @@
+.dashboard {
+  overflow-y: scroll;
+  height: 100%;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    .welcome {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 300px;
+      height: 200px;
+
+      .profile-picture {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin-right: 10px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 35px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 14px;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+
+      button {
+        margin-left: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        span {
+          margin-left: 5px;
+        }
+
+      }
+    }
+  }
+
+  .summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+
+    .card {
+      border-radius: 10px;
+      padding: 20px;
+      width: 170px;
+      height: 140px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+
+      h2 {
+        margin: 0;
+        font-size: 4rem;
+      }
+
+      p {
+        margin: 0;
+        color: gray;
+      }
+    }
+  }
+
+  form {
+    .form-group {
+      display: flex;
+      justify-content: space-around;
+
+      .input-field {
+        width: 50%;
+      }
+    }
+
+    .form-action-btn {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: center;
+
+      .welcome {
+        flex-direction: column;
+        align-items: center;
+
+        .profile-picture {
+          width: 80px;
+          height: 80px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+
+        p {
+          font-size: 12px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .buttons {
+        justify-content: flex-start;
+
+        button {
+          padding: 5px 10px;
+          font-size: 14px;
+        }
+      }
+    }
+
+
+
+    .summary {
+      justify-content: center;
+
+      .card {
+        width: 100%;
+        margin: 5px 0;
+
+        h2 {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header {
+      .welcome {
+        .profile-picture {
+          width: 60px;
+          height: 60px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 10px;
+        }
+      }
+
+      .buttons {
+        button {
+          padding: 5px;
+          font-size: 12px;
+        }
+      }
+    }
+
+    .summary {
+      .card {
+        h2 {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}

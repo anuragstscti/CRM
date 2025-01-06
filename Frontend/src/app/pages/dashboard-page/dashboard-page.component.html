@@ -1,0 +1,51 @@
+<div class="dashboard">
+  <div class="header col-sm-12">
+    <div class="welcome">
+      <img src="https://picsum.photos/200/300" alt="Profile" class="profile-picture" />
+      <div class="main-title">
+        <!-- <h1>Welcome back, <span>{{ userInfo.lName }} {{userInfo.fName}}</span>!</h1> -->
+      </div>
+    </div>
+    <!-- <div class="buttons">
+      <button class="success-btn"><mat-icon>mail</mat-icon> <span>Messages</span></button>
+      <button class="danger-btn"><mat-icon>settings</mat-icon> <span>Settings</span></button>
+    </div> -->
+  </div>
+
+  <div class="summary">
+    <div class="card" *ngFor="let item of summaryItems">
+      <h2 [ngClass]="item.color">{{ item.value }}</h2>
+      <p>{{ item.label }}</p>
+    </div>
+  </div>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Expansion Pannel </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <form class="filter-form mt-2">
+            <div class="form-group">
+                <mat-form-field class="input-field" appearance="outline">
+                    <mat-label>Ticket Type</mat-label>
+                    <input matInput placeholder="Ticket Type">
+                </mat-form-field>
+
+                <mat-form-field class="input-field" appearance="outline">
+                    <mat-label>Ticket No.</mat-label>
+                    <input matInput placeholder="Ticket No.">
+                </mat-form-field>
+            </div>
+            <div class="form-action-btn">
+                <button mat-raised-button class="success-btn"><mat-icon>search</mat-icon> Search</button>
+                <button mat-raised-button class="danger-btn"><mat-icon>close</mat-icon> Close</button>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</mat-accordion>
+
+  <div classs="table-div">
+     <app-table [tableSetting]="tableSetting2"></app-table>
+  </div>
+</div>  

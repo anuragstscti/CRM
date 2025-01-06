@@ -1,0 +1,72 @@
+<div class="table-main-div">
+
+    <mat-card class="table-header">
+        <span>{{tableSetting.tableheading}}</span>
+        <mat-slide-toggle *ngIf="tableSetting.showActiveInactive.showActiveBtn"
+            [checked]="tableSetting.isActive || false"
+            [matTooltip]=" !!!tableSetting.showActiveInactive.apiUrl? 'Api is missing in table settings': 'Active/In-active'"
+            (change)="getActiveInactive($event)" [disabled]="!!!tableSetting.showActiveInactive.apiUrl">
+            <p>Active/Inactive</p>
+        </mat-slide-toggle>
+        <div class="table-hear-btn">
+            <button mat-icon-button aria-label="add" matTooltip="Add" *ngIf="tableSetting.showAddNew?.isAddNew || false"
+                (click)="tableSetting.showAddNew?.callBack()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="send" matTooltip="Send">
+                <mat-icon>send</mat-icon>
+            </button>
+            <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="More">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="exportMenu">
+                    <mat-icon>import_export</mat-icon> Export
+                </button>
+            </mat-menu>
+            <mat-menu #exportMenu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>import_export</mat-icon> Export
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>import_export</mat-icon> Export All
+                </button>
+            </mat-menu>
+        </div>
+    </mat-card>
+    <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" aria-describedby="table">
+            <ng-container matColumnDef="showCheckbox" *ngIf="tableSetting.showCheckbox">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="isAllSelected()"
+                        [indeterminate]="!isAllSelected() && someSelected()"></mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? toggleSelection(element) : null"
+                        [checked]="selection.isSelected(element)"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container *ngFor="let column of tableSetting.columns" [matColumnDef]="column">
+                <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+                <td mat-cell *matCellDef="let row">{{ row[column] }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions" *ngIf="tableSetting.action.length>0">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button *ngFor="let action of tableSetting.action" [matTooltip]="action.label"
+                        [ngStyle]="{'color':action.color}" (click)="action.callBack(element)">
+                        <mat-icon>{{action.icon}}</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,200,500,1000,5000]" showFirstLastButtons
+        aria-label="Select page of periodic elements" *ngIf="tableSetting.isPagination">
+    </mat-paginator>
+</div>

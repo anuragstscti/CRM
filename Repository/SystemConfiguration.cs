@@ -9,7 +9,7 @@ namespace CRM.Repository
 
         public string GetConfigurationDetails(string fieldText)
         {
-            var rec = _db.SystemConfigurations.Where(x => x.Field == fieldText && !x.IsDeleted).Select(x=>x.Value).FirstOrDefault();
+            var rec = _db.SystemConfigurations.Where(x => x.Field == fieldText && !x.IsDeleted).Select(x => x.Value).FirstOrDefault();
             return rec;
         }
     }

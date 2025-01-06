@@ -1,0 +1,34 @@
+<mat-toolbar class="mat-toolbar-mini-header">
+    <div class="carousel-container">
+      <button mat-icon-button class="prev" (click)="prev()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+  
+      <div class="carousel-content">
+        <ul class="mini-nav-header" #carousel>
+          <li *ngFor="let navItem of leftHeaderNavElement">
+            <button *ngIf="navItem.childRoute.length < 1" mat-icon-button aria-label="Icon button"
+              class="list-menu" [routerLink]="navItem.route" routerLinkActive="activebutton">
+              <mat-icon class="infor">{{ navItem.icon }}</mat-icon>
+            </button>
+            <button *ngIf="navItem.childRoute.length > 0" mat-icon-button [matMenuTriggerFor]="menu"
+              aria-label="Icon button" class="list-menu">
+              <mat-icon class="chat">{{ navItem.icon }}</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let item of navItem.childRoute" [routerLink]="item.route"
+                routerLinkActive="activebutton">
+                <mat-icon class="profile">{{ item.icon }}</mat-icon>
+                <span>{{ item.name }}</span>
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+  
+      <button mat-icon-button class="next" (click)="next()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
