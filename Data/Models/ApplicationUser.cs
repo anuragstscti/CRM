@@ -4,6 +4,7 @@ namespace CRM.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public DateOnly? DateOfBirth { get; set; }
         public int? AppUserID { get; set; }
         public int? CreatedBy { get; set; }
         public DateTimeOffset? CreatedDateTime { get; set; }
