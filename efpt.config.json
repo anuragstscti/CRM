@@ -6,7 +6,7 @@
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Models",
+   "OutputPath": "Data\\Models",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "CRM",
    "Schemas": null,
@@ -14,6 +14,10 @@
    "SelectedToBeGenerated": 0,
    "T4TemplatePath": null,
    "Tables": [
+      {
+         "Name": "[dbo].[Case]",
+         "ObjectType": 0
+      },
       {
          "Name": "[dbo].[SystemConfiguration]",
          "ObjectType": 0

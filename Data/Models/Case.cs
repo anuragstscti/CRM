@@ -5,15 +5,17 @@ using System.Collections.Generic;
 
 namespace CRM.Data.Models;
 
-public partial class SystemConfiguration
+public partial class Case
 {
     public int Id { get; set; }
 
-    public string Field { get; set; }
+    public int CustomerId { get; set; }
 
-    public string Value { get; set; }
+    public string IssueDescripition { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public int CtstatusId { get; set; }
+
+    public int CtpriorityId { get; set; }
 
     public int CreatedBy { get; set; }
 
