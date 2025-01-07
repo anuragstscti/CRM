@@ -26,11 +26,8 @@ namespace CRM.Controllers
             if (model == null || string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Password))
                 return BadRequest("Invalid input data.");
 
-            var appUserId = _db.ApplicationUsers
-                .OrderByDescending(x => x.AppUserID)
-                .Select(x => x.AppUserID)
-                .DefaultIfEmpty(0)
-                .First() + 1;
+            var appuserID = _db.ApplicationUsers.OrderByDescending(x => x.AppUserID).Select(x => x.AppUserID).FirstOrDefault();
+            appuserID = (appuserID == null || appuserID == 0) ? 1 : appuserID + 1;
 
             var user = new ApplicationUser
             {
@@ -38,7 +35,7 @@ namespace CRM.Controllers
                 Email = model.Email,
                 CreatedBy = TrackUser.AppUserID(),
                 CreatedDateTime = DateTimeOffset.Now,
-                AppUserID = appUserId
+                AppUserID = appuserID
             };
 
             if (!await _roleManager.RoleExistsAsync(RoleName.User))
