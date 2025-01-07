@@ -15,34 +15,31 @@ import { AuthGuard } from './guard/auth.guard';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login', 
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: '',
     component: PagesComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+    
       { path: 'home', component: DashboardComponent,canActivate:[AuthGuard]},
-      { path: 'tickets', component: TicketsComponent},
-      { path: 'settings', component: SettingsComponent},
-      { path: 'calls-care', component: CallcareComponent},
-      { path: 'form-example', component: FormExampleComponent },
-      { path: 'dashboard', component: DashboardComponent},
-      {path:'navigation',component:NavigationSideNavComponent},
-      // {
-      //   path: 'cad',        
-      //   loadChildren: () => import('./modules/cad/cad.module').then(m => m.CadModule)
-      // },
-
-      // {
-      //   path: 'aes',        
-      //   loadChildren: () => import('./modules/aes/aes.module').then(m => m.AesModule)
-      // },
-      // {
-      //   path: 'case-management',        
-      //   loadChildren: () => import('./modules/case-management/case-management.module').then(m => m.CaseManagementModule)
-      // }
+      { path: 'tickets', component: TicketsComponent,canActivate:[AuthGuard]},
+      { path: 'settings', component: SettingsComponent,canActivate:[AuthGuard]},
+      { path: 'calls-care', component: CallcareComponent,canActivate:[AuthGuard]},
+      { path: 'form-example', component: FormExampleComponent ,canActivate:[AuthGuard]},
+      { path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]},
+      {path:'navigation',component:NavigationSideNavComponent,canActivate:[AuthGuard]},
+     
       
     ]
   },
 
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent,canActivate:[AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -26,7 +26,7 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       email:['',Validators.required],
       password:['',Validators.required]
-    })
+    })  
   }
   login() {
     let mail = this.loginForm.controls['email'].value

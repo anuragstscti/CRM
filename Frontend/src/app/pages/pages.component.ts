@@ -11,6 +11,7 @@ import { HeaderService } from '../shared/header/header.service';
   styleUrl: './pages.component.scss'
 })
 export class PagesComponent implements OnInit {
+  isLogin:boolean = false
   showLoader: boolean = false;
   userProfileSettings: any = { theme: 'light', fontSize: '1x' };
   subscription: Subscription;
@@ -21,6 +22,9 @@ export class PagesComponent implements OnInit {
     public router: Router,
     public alertService: AlertService,
   ) {
+    this.mainService.cadStatusData$.subscribe(res=>{
+      this.isLogin = res;       
+    })
     this.subscription = this.mainService.showLoaderEvt$.subscribe((evt: any) => {
       if (evt != null) {
         this.showLoader = evt;

@@ -6,6 +6,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { HeaderService } from './header.service';
 import { AlertService } from '../alert/alert.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../guard/auth.service';
 
 
 @Component({
@@ -14,49 +15,57 @@ import { Subscription } from 'rxjs';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  @Input() userProfileSettings: any = { theme: 'light', fontSize: '1x' };
-  isToggled: boolean = true;
+  logout:boolean = false;
   callCare:boolean = false;
-  themeName: string = 'light';
-  currentTime!: string;
-  signalStrength: number = 0;
-  showButtons: any;
-  showAdd = false;
-  profileName: any;
-  isMatMenuOpen: boolean = false;
-  isMatMenu2Open: boolean = false;
-  enteredButton: boolean = false;
-  buttonTextValue: string = '';
-  currentRoute: string = '';
-  ren: any;
-  prevButtonTrigger: any;
-  cadStatusSubscription!: Subscription;
-  currentModule!: string;
+  isToggled: boolean = true;
+
+  // @Input() userProfileSettings: any = { theme: 'light', fontSize: '1x' };
+  // themeName: string = 'light';
+  // currentTime!: string;
+  // signalStrength: number = 0;
+  // showButtons: any;
+  // showAdd = false;
+  // profileName: any;
+  // isMatMenuOpen: boolean = false;
+  // isMatMenu2Open: boolean = false;
+  // enteredButton: boolean = false;
+  // buttonTextValue: string = '';
+  // currentRoute: string = '';
+  // ren: any;
+  // prevButtonTrigger: any;
+  // cadStatusSubscription!: Subscription;
+  // currentModule!: string;
   subscription: Subscription | undefined;
-  userDetails = JSON.parse(localStorage.getItem('authToken') ?? '{}');
+  // userDetails = JSON.parse(localStorage.getItem('authToken') ?? '{}');
   isIncidentAssigned: boolean = false;
-  constructor( public dialog: MatDialog, public router: Router, public commonServices: AppService, public mainService: AppService, public headerService: HeaderService, public alertServices: AlertService) {
-    this.cadStatusSubscription = this.mainService.cadStatusData$.subscribe((res) => {
-      if (res !== null) {
-        this.buttonTextValue = res;
-      }
-    });
-    this.router.events.subscribe((event) => {
-      this.currentRoute = this.router.url;
-    });
+  constructor( public dialog: MatDialog,
+     public router: Router,
+     public commonServices: AppService,
+     public mainService: AppService,
+     public headerService: HeaderService,
+     public alertServices: AlertService,
+     private sessionService:AuthService) {
+    // this.cadStatusSubscription = this.mainService.cadStatusData$.subscribe((res) => {
+    //   if (res !== null) {
+    //     this.buttonTextValue = res;
+    //   }
+    // });
+    // this.router.events.subscribe((event) => {
+    //   this.currentRoute = this.router.url;
+    // });
   }
   ngOnInit() {  
-    this.headerService.sendDateData$.subscribe(
-      {
-        next: (x: any) => {
-          if (x == null) {
-            this.showAdd = true;
-          }
-          else {
-            this.showAdd = x;
-          }
-        }
-      })
+    // this.headerService.sendDateData$.subscribe(
+    //   {
+    //     next: (x: any) => {
+    //       if (x == null) {
+    //         this.showAdd = true;
+    //       }
+    //       else {
+    //         this.showAdd = x;
+    //       }
+    //     }
+    //   })
 
   }
 
@@ -67,10 +76,8 @@ export class HeaderComponent {
 
 
   ngOnDestroy() {
-    this.headerService.sendDateDatas(true);
     this.subscription && this.subscription.unsubscribe();
   }
-  // Open side nav
   payload:boolean = false
   openSideNav(name:any) {
     if(name == 'sidenav'){
@@ -86,14 +93,12 @@ export class HeaderComponent {
     }
     this.mainService.sideNavToggle.next(obj)
   }
-  // Manage Theme
-
-  // Manage Size of the screen
   
-
-
-
-
-
+  logOut(): void {
+    this.sessionService.logout(); 
+    this.router.navigate(['/login']);
+    this.logout=false;    
+    this.commonServices.cadStatusData.next(this.logout)
+  }
 
 }

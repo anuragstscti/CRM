@@ -18,11 +18,11 @@ import {
   transition,
   trigger
 } from "./chunk-S2IVXKQF.js";
-import "./chunk-ZTX57BIR.js";
 import {
   MatButton,
   MatButtonModule
 } from "./chunk-OXKCEBTY.js";
+import "./chunk-ZTX57BIR.js";
 import {
   BreakpointObserver,
   Breakpoints,
