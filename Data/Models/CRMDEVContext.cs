@@ -2,10 +2,9 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using CRM.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CRM.Models;
+namespace CRM.Data.Models;
 
 public partial class CRMDEVContext : DbContext
 {
@@ -14,10 +13,23 @@ public partial class CRMDEVContext : DbContext
     {
     }
 
+    public virtual DbSet<Case> Cases { get; set; }
+
     public virtual DbSet<SystemConfiguration> SystemConfigurations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Case>(entity =>
+        {
+            entity.ToTable("Case");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CtpriorityId).HasColumnName("CTPriorityID");
+            entity.Property(e => e.CtstatusId).HasColumnName("CTStatusID");
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.IssueDescripition).IsRequired();
+        });
+
         modelBuilder.Entity<SystemConfiguration>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__SystemCo__3214EC27314DFBF9");

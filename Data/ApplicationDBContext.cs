@@ -1,5 +1,4 @@
 ﻿using CRM.Data.Models;
-using CRM.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,11 +7,23 @@ namespace CRM.Data
     public partial class ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : IdentityDbContext<ApplicationUser>(options)
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public virtual DbSet<Case> Cases { get; set; }
         public virtual DbSet<SystemConfiguration> SystemConfigurations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); // Ensure Identity configuration is applied
+
+            modelBuilder.Entity<Case>(entity =>
+            {
+                entity.ToTable("Case");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.CtpriorityId).HasColumnName("CTPriorityID");
+                entity.Property(e => e.CtstatusId).HasColumnName("CTStatusID");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+                entity.Property(e => e.IssueDescripition).IsRequired();
+            });
 
             modelBuilder.Entity<SystemConfiguration>(entity =>
             {
