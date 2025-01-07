@@ -34,7 +34,7 @@ namespace CRM.Controllers
 
             var user = new ApplicationUser
             {
-                UserName = model.Email,
+                UserName = model.Username,
                 Email = model.Email,
                 CreatedBy = TrackUser.AppUserID(),
                 CreatedDateTime = DateTimeOffset.Now,
