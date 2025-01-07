@@ -47,6 +47,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[CommonType]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[SystemConfiguration]",
          "ObjectType": 0
       }

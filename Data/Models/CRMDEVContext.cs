@@ -27,6 +27,8 @@ public partial class CRMDEVContext : DbContext
 
     public virtual DbSet<Case> Cases { get; set; }
 
+    public virtual DbSet<CommonType> CommonTypes { get; set; }
+
     public virtual DbSet<SystemConfiguration> SystemConfigurations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -113,6 +115,19 @@ public partial class CRMDEVContext : DbContext
             entity.Property(e => e.CtstatusId).HasColumnName("CTStatusID");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.IssueDescripition).IsRequired();
+        });
+
+        modelBuilder.Entity<CommonType>(entity =>
+        {
+            entity.ToTable("CommonType");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Code).HasMaxLength(10);
+            entity.Property(e => e.Ctid).HasColumnName("CTID");
+            entity.Property(e => e.Keys).HasMaxLength(4);
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(200);
         });
 
         modelBuilder.Entity<SystemConfiguration>(entity =>
