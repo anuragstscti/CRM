@@ -33,6 +33,7 @@ namespace CRM.Controllers
             {
                 UserName = model.Username,
                 Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
                 CreatedBy = TrackUser.AppUserID(),
                 CreatedDateTime = DateTimeOffset.Now,
                 AppUserID = appuserID
