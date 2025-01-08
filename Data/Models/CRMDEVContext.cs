@@ -29,6 +29,8 @@ public partial class CRMDEVContext : DbContext
 
     public virtual DbSet<CommonType> CommonTypes { get; set; }
 
+    public virtual DbSet<CustomerProfile> CustomerProfiles { get; set; }
+
     public virtual DbSet<SystemConfiguration> SystemConfigurations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -122,12 +124,36 @@ public partial class CRMDEVContext : DbContext
             entity.ToTable("CommonType");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Code).HasMaxLength(10);
+            entity.Property(e => e.Code).HasMaxLength(30);
             entity.Property(e => e.Ctid).HasColumnName("CTID");
             entity.Property(e => e.Keys).HasMaxLength(4);
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<CustomerProfile>(entity =>
+        {
+            entity.ToTable("CustomerProfile");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.BussinessEmail).HasMaxLength(500);
+            entity.Property(e => e.BussinessName).HasMaxLength(200);
+            entity.Property(e => e.BussinessPhNo).HasMaxLength(500);
+            entity.Property(e => e.CtgenderId).HasColumnName("CTGenderID");
+            entity.Property(e => e.EmailAddress).HasMaxLength(500);
+            entity.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.FullName)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.HomePhNo).HasMaxLength(500);
+            entity.Property(e => e.LastName).HasMaxLength(200);
+            entity.Property(e => e.MiddleName).HasMaxLength(200);
+            entity.Property(e => e.MobilePhNo).HasMaxLength(500);
+            entity.Property(e => e.PersonalEmail).HasMaxLength(500);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(500);
         });
 
         modelBuilder.Entity<SystemConfiguration>(entity =>

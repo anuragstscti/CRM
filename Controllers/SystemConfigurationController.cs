@@ -7,9 +7,9 @@ namespace CRM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SystemConfigurationController(ISystemConfiguration systemConfiguration) : ControllerBase
+    public class SystemConfigurationController(ISystemConfigurationRepository systemConfiguration) : ControllerBase
     {
-        private readonly ISystemConfiguration _systemConfiguration = systemConfiguration;
+        private readonly ISystemConfigurationRepository _systemConfiguration = systemConfiguration;
 
         [HttpGet("getCCPInstance")]
         public IActionResult GetCCPInstance()

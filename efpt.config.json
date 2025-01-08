@@ -51,6 +51,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[CustomerProfile]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[SystemConfiguration]",
          "ObjectType": 0
       }

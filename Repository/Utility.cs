@@ -8,4 +8,9 @@
     {
         public const string CCPInstance = "DefaultCCPInstance";
     }
+    public static class CommonTypeCode
+    {
+        public const string Gender = "GenderList";
+        public const string Address = "AddressList";
+    }
 }

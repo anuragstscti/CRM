@@ -3,7 +3,7 @@ using CRM.Repository.Interface;
 
 namespace CRM.Repository
 {
-    public class SystemConfiguration(ApplicationDBContext db) : ISystemConfiguration
+    public class SystemConfigurationRepository(ApplicationDBContext db) : ISystemConfigurationRepository
     {
         private readonly ApplicationDBContext _db = db;
 
