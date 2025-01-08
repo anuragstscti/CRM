@@ -6,9 +6,9 @@ namespace CRM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerProfileController(IUserProfileRepository userProfileRepository) : ControllerBase
+    public class CustomerProfileController(ICustomerProfileRepository userProfileRepository) : ControllerBase
     {
-        private readonly IUserProfileRepository _userProfileRepository = userProfileRepository;
+        private readonly ICustomerProfileRepository _userProfileRepository = userProfileRepository;
 
         [HttpPost]
         public IActionResult CreateUserProfile(CustomerProfileViewModel viewModel)

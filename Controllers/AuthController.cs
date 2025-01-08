@@ -70,8 +70,8 @@ namespace CRM.Controllers
             var authClaims = new List<Claim>
             {
                 new(ClaimTypes.Email, user.Email),
-                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new("AppUserID",user.AppUserID.ToString())
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                //new("AppUserID",user.AppUserID.ToString())
                 //new(ClaimTypes.Role, assignRole),
             };
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -86,7 +86,8 @@ namespace CRM.Controllers
             var res = new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token),
-                roles
+                roles,
+                user.AppUserID
             };
             return Ok(res);
         }

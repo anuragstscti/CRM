@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace CRM.Repository
 {
-    public class UserProfileRepository(ApplicationDBContext db) : IUserProfileRepository
+    public class CustomerProfileRepository(ApplicationDBContext db) : ICustomerProfileRepository
     {
         private readonly ApplicationDBContext _db = db;
 
@@ -45,9 +45,7 @@ namespace CRM.Repository
         }
         public List<CustomerProfile> GetUserProfile(int userId)
         {
-            //var res=_db.CustomerProfiles.Where(x=>x.CreatedBy==userId).ToList();
-            var res = _db.CustomerProfiles.ToList();
-
+            var res = _db.CustomerProfiles.Where(x => x.CreatedBy == userId).ToList();
             foreach (var item in res)
             {
                 item.FirstName = EncryptionHelper.DecryptField(item.FirstName);
