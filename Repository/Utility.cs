@@ -12,5 +12,6 @@
     {
         public const string Gender = "GenderList";
         public const string Address = "AddressList";
+        public const string PartyType = "PartyType";
     }
 }

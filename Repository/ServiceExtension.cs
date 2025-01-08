@@ -8,6 +8,7 @@ namespace CRM.Repository
         {
             services.AddScoped<ISystemConfigurationRepository, SystemConfigurationRepository>();
             services.AddScoped<ICustomerProfileRepository , CustomerProfileRepository>();
+            services.AddScoped<ICommonTypeRepository , CommonTypeRepository>();
         }
     }
 }
