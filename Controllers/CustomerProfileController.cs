@@ -10,8 +10,8 @@ namespace CRM.Controllers
     {
         private readonly ICustomerProfileRepository _userProfileRepository = userProfileRepository;
 
-        [HttpPost]
-        public IActionResult CreateUserProfile(CustomerProfileViewModel viewModel)
+        [HttpPost("addCustomerProfile")]
+        public IActionResult CreateUserProfile([FromBody] CustomerProfileViewModel viewModel)
         {
             _userProfileRepository.CreateUserProfile(viewModel);
             return Ok(viewModel);
