@@ -29,6 +29,8 @@ public partial class CRMDEVContext : DbContext
 
     public virtual DbSet<CommonType> CommonTypes { get; set; }
 
+    public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; }
+
     public virtual DbSet<CustomerProfile> CustomerProfiles { get; set; }
 
     public virtual DbSet<SystemConfiguration> SystemConfigurations { get; set; }
@@ -130,6 +132,43 @@ public partial class CRMDEVContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<CustomerAddress>(entity =>
+        {
+            entity.ToTable("CustomerAddress");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.BillingAppSuite).HasMaxLength(500);
+            entity.Property(e => e.BillingCity).HasMaxLength(500);
+            entity.Property(e => e.BillingCountry).HasMaxLength(500);
+            entity.Property(e => e.BillingPostalCode).HasMaxLength(500);
+            entity.Property(e => e.BillingStateProvince).HasMaxLength(500);
+            entity.Property(e => e.BillingStreetAddress).HasMaxLength(500);
+            entity.Property(e => e.CustomerProfileId).HasColumnName("CustomerProfileID");
+            entity.Property(e => e.MailingAppSuite).HasMaxLength(500);
+            entity.Property(e => e.MailingCity).HasMaxLength(500);
+            entity.Property(e => e.MailingCountry).HasMaxLength(500);
+            entity.Property(e => e.MailingPostalCode).HasMaxLength(500);
+            entity.Property(e => e.MailingStateProvince).HasMaxLength(500);
+            entity.Property(e => e.MailingStreetAddress).HasMaxLength(500);
+            entity.Property(e => e.OtherShippingAppSuite).HasMaxLength(500);
+            entity.Property(e => e.OtherShippingCity).HasMaxLength(500);
+            entity.Property(e => e.OtherShippingCountry).HasMaxLength(500);
+            entity.Property(e => e.OtherShippingPostalCode).HasMaxLength(500);
+            entity.Property(e => e.OtherShippingStateProvince).HasMaxLength(500);
+            entity.Property(e => e.OtherShippingStreetAddress).HasMaxLength(500);
+            entity.Property(e => e.ShippingAppSuite).HasMaxLength(500);
+            entity.Property(e => e.ShippingCity).HasMaxLength(500);
+            entity.Property(e => e.ShippingCountry).HasMaxLength(500);
+            entity.Property(e => e.ShippingPostalCode).HasMaxLength(500);
+            entity.Property(e => e.ShippingStateProvince).HasMaxLength(500);
+            entity.Property(e => e.ShippingStreetAddress).HasMaxLength(500);
+
+            entity.HasOne(d => d.CustomerProfile).WithMany(p => p.CustomerAddresses)
+                .HasForeignKey(d => d.CustomerProfileId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CustomerAddress_CustomerProfile");
         });
 
         modelBuilder.Entity<CustomerProfile>(entity =>

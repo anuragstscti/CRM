@@ -52,4 +52,6 @@ public partial class CustomerProfile
     public int? UpdatedBy { get; set; }
 
     public DateTimeOffset? UpdatedDateTime { get; set; }
+
+    public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; } = new List<CustomerAddress>();
 }
