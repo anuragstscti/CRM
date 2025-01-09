@@ -1,6 +1,4 @@
-﻿using Amazon.Connect;
-using Amazon.Runtime;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.Controllers
 {
@@ -10,7 +8,7 @@ namespace CRM.Controllers
     {
         public AwsConnectController()
         {
-                
+
         }
         //public void ConnectAWS()
         //{

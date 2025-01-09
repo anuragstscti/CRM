@@ -2,7 +2,6 @@
 using CRM.Data.Models;
 using CRM.Repository.Interface;
 using CRM.ViewModels;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace CRM.Repository
 {
@@ -18,17 +17,17 @@ namespace CRM.Repository
                 MiddleName = EncryptionHelper.EncryptField(viewModel.MiddleName),
                 LastName = EncryptionHelper.EncryptField(viewModel.LastName),
                 BussinessName = EncryptionHelper.EncryptField(viewModel.BussinessName),
-                FullName = EncryptionHelper.EncryptField(string.Concat(viewModel.FirstName, viewModel.MiddleName, viewModel.LastName)),
+                FullName = EncryptionHelper.EncryptField(string.Concat(viewModel.FirstName, " ", viewModel.MiddleName, " ", viewModel.LastName)),
                 AccountNumber = EncryptionHelper.EncryptField(viewModel.AccountNumber),
                 AdditionalInformation = EncryptionHelper.EncryptField(viewModel.AdditionalInformation),
                 EmailAddress = EncryptionHelper.EncryptField(viewModel.EmailAddress),
                 PhoneNumber = EncryptionHelper.EncryptField(viewModel.PhoneNumber),
+                CtgenderId = viewModel.CtGenderId,
+                CtpartyTypeId = viewModel.CtPartyTypeId,
                 CreatedBy = TrackUser.AppUserID(),
                 CreatedDateTime = DateTimeOffset.Now,
-                DateOfBirth = viewModel.BirthDate,//EncryptionHelper.EncryptField(viewModel.BirthDate),
-                //GenderString = EncryptionHelper.EncryptField(viewModel.GenderString),
-                //PartyTypeString = EncryptionHelper.EncryptField(viewModel.PartyTypeString),
-                //DomainName = EncryptionHelper.EncryptField(viewModel.DomainName)
+                DateOfBirth = viewModel.BirthDate,
+                DomainName = EncryptionHelper.EncryptField(viewModel.DomainName)
                 //MailingAddress = new Mailingaddress
                 //{
                 //    Address1 = EncryptionHelper.EncryptField(viewModel.MailingAddress.Address1),
@@ -43,22 +42,34 @@ namespace CRM.Repository
             _db.SaveChanges();
             return viewModel;
         }
-        public List<CustomerProfile> GetUserProfile(int userId)
+        public List<CustomerProfileViewModel> GetUserProfile(int userId)
         {
-            var res = _db.CustomerProfiles.Where(x => x.CreatedBy == userId).ToList();
-            foreach (var item in res)
+            //var res = _db.CustomerProfiles.Where(x => x.CreatedBy == userId).ToList();
+            var res = _db.CustomerProfiles.ToList();
+            List<CustomerProfileViewModel> decryptedProfiles = res.Select(profile => new CustomerProfileViewModel
             {
-                item.FirstName = EncryptionHelper.DecryptField(item.FirstName);
-                item.MiddleName = EncryptionHelper.DecryptField(item.MiddleName);
-                item.LastName = EncryptionHelper.DecryptField(item.LastName);
-                item.BussinessName = EncryptionHelper.DecryptField(item.BussinessName);
-                item.FullName = EncryptionHelper.DecryptField(string.Concat(item.FirstName, item.MiddleName, item.LastName));
-                item.AccountNumber = EncryptionHelper.DecryptField(item.AccountNumber);
-                item.AdditionalInformation = EncryptionHelper.DecryptField(item.AdditionalInformation);
-                item.EmailAddress = EncryptionHelper.DecryptField(item.EmailAddress);
-                item.PhoneNumber = EncryptionHelper.DecryptField(item.PhoneNumber);
-            }
-            return res;
+                FirstName = EncryptionHelper.DecryptField(profile.FirstName),
+                MiddleName = EncryptionHelper.DecryptField(profile.MiddleName),
+                LastName = EncryptionHelper.DecryptField(profile.LastName),
+                BussinessName = EncryptionHelper.DecryptField(profile.BussinessName),
+                FullName = string.Concat(EncryptionHelper.DecryptField(profile.FirstName),
+                                         EncryptionHelper.DecryptField(profile.MiddleName),
+                                         EncryptionHelper.DecryptField(profile.LastName)),
+
+                AccountNumber = EncryptionHelper.DecryptField(profile.AccountNumber),
+                AdditionalInformation = EncryptionHelper.DecryptField(profile.AdditionalInformation),
+                EmailAddress = EncryptionHelper.DecryptField(profile.EmailAddress),
+                PhoneNumber = EncryptionHelper.DecryptField(profile.PhoneNumber),
+                CtGenderId = profile.CtgenderId,
+                CtPartyTypeId = profile.CtpartyTypeId,
+                GenderString = _db.CommonTypes.Where(x => x.Id == profile.CtgenderId).Select(x => x.Name).FirstOrDefault(),
+                PartyTypeString = _db.CommonTypes.Where(x => x.Id == profile.CtpartyTypeId).Select(x => x.Name).FirstOrDefault(),
+                CreatedBy = profile.CreatedBy,
+                CreatedDateTime = profile.CreatedDateTime,
+                UpdatedBy = profile.UpdatedBy,
+                UpdatedDateTime = profile.UpdatedDateTime
+            }).ToList();
+            return decryptedProfiles;
         }
     }
 }

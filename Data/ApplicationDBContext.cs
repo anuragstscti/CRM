@@ -45,23 +45,10 @@ namespace CRM.Data
                 entity.ToTable("CustomerProfile");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
-                entity.Property(e => e.BussinessEmail).HasMaxLength(500);
-                entity.Property(e => e.BussinessName).HasMaxLength(200);
-                entity.Property(e => e.BussinessPhNo).HasMaxLength(500);
                 entity.Property(e => e.CtgenderId).HasColumnName("CTGenderID");
-                entity.Property(e => e.EmailAddress).HasMaxLength(500);
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-                entity.Property(e => e.FullName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-                entity.Property(e => e.HomePhNo).HasMaxLength(500);
-                entity.Property(e => e.LastName).HasMaxLength(200);
-                entity.Property(e => e.MiddleName).HasMaxLength(200);
-                entity.Property(e => e.MobilePhNo).HasMaxLength(500);
-                entity.Property(e => e.PersonalEmail).HasMaxLength(500);
-                entity.Property(e => e.PhoneNumber).HasMaxLength(500);
+                entity.Property(e => e.CtpartyTypeId).HasColumnName("CTPartyTypeID");
+                entity.Property(e => e.FirstName).IsRequired();
+                entity.Property(e => e.FullName).IsRequired();
             });
 
             modelBuilder.Entity<SystemConfiguration>(entity =>

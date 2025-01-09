@@ -7,8 +7,8 @@ namespace CRM.Repository
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<ISystemConfigurationRepository, SystemConfigurationRepository>();
-            services.AddScoped<ICustomerProfileRepository , CustomerProfileRepository>();
-            services.AddScoped<ICommonTypeRepository , CommonTypeRepository>();
+            services.AddScoped<ICustomerProfileRepository, CustomerProfileRepository>();
+            services.AddScoped<ICommonTypeRepository, CommonTypeRepository>();
         }
     }
 }

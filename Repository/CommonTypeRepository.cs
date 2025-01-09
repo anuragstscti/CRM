@@ -1,5 +1,4 @@
 ﻿using CRM.Data;
-using CRM.Data.Models;
 using CRM.Repository.Interface;
 using CRM.ViewModels;
 

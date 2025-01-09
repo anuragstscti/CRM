@@ -1,6 +1,5 @@
 ﻿using CRM.Repository;
 using CRM.Repository.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.Controllers

@@ -21,7 +21,7 @@ public partial class CustomerProfile
 
     public int? CtgenderId { get; set; }
 
-    public int? PartyType { get; set; }
+    public int? CtpartyTypeId { get; set; }
 
     public DateOnly? DateOfBirth { get; set; }
 
@@ -42,6 +42,8 @@ public partial class CustomerProfile
     public string PersonalEmail { get; set; }
 
     public string BussinessEmail { get; set; }
+
+    public string DomainName { get; set; }
 
     public int CreatedBy { get; set; }
 
