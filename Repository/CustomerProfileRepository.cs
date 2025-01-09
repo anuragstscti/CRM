@@ -51,8 +51,8 @@ namespace CRM.Repository
                 MiddleName = EncryptionHelper.DecryptField(profile.MiddleName),
                 LastName = EncryptionHelper.DecryptField(profile.LastName),
                 BussinessName = EncryptionHelper.DecryptField(profile.BussinessName),
-                FullName = string.Concat(EncryptionHelper.DecryptField(profile.FirstName),
-                                         EncryptionHelper.DecryptField(profile.MiddleName),
+                FullName = string.Concat(EncryptionHelper.DecryptField(profile.FirstName)," ",
+                                         EncryptionHelper.DecryptField(profile.MiddleName)," ",
                                          EncryptionHelper.DecryptField(profile.LastName)),
 
                 AccountNumber = EncryptionHelper.DecryptField(profile.AccountNumber),
