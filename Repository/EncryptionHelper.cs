@@ -8,9 +8,9 @@ namespace CRM.Repository
     {
         private static readonly string Key = "d8fb81d433dd78dbb32f21f43c513484";
 
-        public static string EncryptField(string value)
+        public static string? EncryptField(string value)
         {
-            if (string.IsNullOrEmpty(value)) return value;
+            if (string.IsNullOrEmpty(value)) return null;
 
             using var aes = Aes.Create();
             aes.Key = Encoding.UTF8.GetBytes(Key);
