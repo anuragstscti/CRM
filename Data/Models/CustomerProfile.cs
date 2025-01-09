@@ -17,8 +17,6 @@ public partial class CustomerProfile
 
     public string FullName { get; set; }
 
-    public string BussinessName { get; set; }
-
     public int? CtgenderId { get; set; }
 
     public int? CtpartyTypeId { get; set; }
