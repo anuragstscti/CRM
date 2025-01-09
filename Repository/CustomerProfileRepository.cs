@@ -44,8 +44,7 @@ namespace CRM.Repository
         }
         public List<CustomerProfileViewModel> GetUserProfile(int userId)
         {
-            //var res = _db.CustomerProfiles.Where(x => x.CreatedBy == userId).ToList();
-            var res = _db.CustomerProfiles.ToList();
+            var res = _db.CustomerProfiles.Where(x => x.CreatedBy == userId).ToList();
             List<CustomerProfileViewModel> decryptedProfiles = res.Select(profile => new CustomerProfileViewModel
             {
                 FirstName = EncryptionHelper.DecryptField(profile.FirstName),
