@@ -20,7 +20,7 @@ namespace CRM.Controllers
         [HttpGet("getCustomerProfileList/{userid}")]
         public IActionResult GetUserProfile(int userid)
         {
-            var res = _userProfileRepository.GetUserProfile(0);
+            var res = _userProfileRepository.GetUserProfile(userid);
             return Ok(res);
         }
     }
