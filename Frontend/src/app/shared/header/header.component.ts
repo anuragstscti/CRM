@@ -98,6 +98,7 @@ export class HeaderComponent {
     this.sessionService.logout(); 
     this.router.navigate(['/login']);
     this.logout=false;    
+    this.alertServices.info("user logged out")
     this.commonServices.cadStatusData.next(this.logout)
   }
 

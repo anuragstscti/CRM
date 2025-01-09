@@ -1,4 +1,4 @@
-<app-header></app-header>
+ <app-header></app-header>
      <mat-drawer-container class="example-container">
         <mat-drawer #drawer mode="side" opened>
       <mat-nav-list>
@@ -17,13 +17,108 @@
     </mat-drawer-content>
 </mat-drawer-container>
 <mat-drawer-container>
-    <mat-sidenav #callDrawer position="end" class="example-container2" mode="side"  fixedInViewport="true" opened>
-        <div fxLayout="row" fxLayoutAlign="center center" class="control mat-elevation-z1">
-            <h2>Settings</h2>
+    <mat-sidenav #callDrawer position="end" class="example-container2" mode="side"  fixedInViewport="true" closed>
+      <div class="dialer-container">
+        <h2>Phone Dialer</h2>
+      
+        <!-- Country Code and Phone Number Input -->
+        <div class="input-group">
+          <mat-form-field appearance="outline" class="country-select">
+            <mat-label>Country Code</mat-label>
+            <mat-select [(ngModel)]="selectedCountryCode">
+              <mat-option *ngFor="let country of countryCodes" [value]="country.code">
+                {{ country.code }} ({{ country.name }})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="phone-input">
+            <mat-label>Phone Number</mat-label>
+            <input matInput [(ngModel)]="phoneNumber" placeholder="Enter phone number" readonly />
+          </mat-form-field>
+        </div>
+      
+        <!-- Keypad -->
+        <div class="keypad">
+          <div class="keypad-row">
+            <button mat-raised-button (click)="appendToPhoneNumber('1')">1</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('2')">2</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('3')">3</button>
           </div>
+          <div class="keypad-row">
+            <button mat-raised-button (click)="appendToPhoneNumber('4')">4</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('5')">5</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('6')">6</button>
+          </div>
+          <div class="keypad-row">
+            <button mat-raised-button (click)="appendToPhoneNumber('7')">7</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('8')">8</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('9')">9</button>
+          </div>
+          <div class="keypad-row">
+            <button mat-raised-button (click)="appendToPhoneNumber('*')">*</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('0')">0</button>
+            <button mat-raised-button (click)="appendToPhoneNumber('#')">#</button>
+          </div>
+          <div class="keypad-row">
+            <button mat-raised-button (click)="backspace()">Backspace</button>
+          </div>
+        </div>
+      
+        <!-- Dial Button -->
+        <button mat-raised-button color="primary" (click)="dialNumber()" class="dial-button">Dial</button>
+      
+        <!-- Result Message -->
+        <p *ngIf="dialedNumber" class="dialed-number">Dialing: {{ dialedNumber }}</p>
+      </div>
 </mat-sidenav>
 </mat-drawer-container> 
 
 
 
 
+
+
+
+
+<!-- 
+<app-header></app-header>
+
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer mode="side" opened>
+    <mat-nav-list>
+      <a *ngFor="let item of items" mat-list-item [routerLink]="item.route" routerLinkActive="active-link" (click)="toggleSubmenu(item)">
+        <div class="sidenav-header">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span class="header-font">{{ item.name }}</span>
+        </div>
+      </a>
+    
+      <ng-container *ngFor="let item of items">
+        <div *ngIf="item.showSubmenu">
+          <mat-nav-list class="submenu-list">
+            <mat-list-item *ngFor="let subitem of item.submenu" [routerLink]="subitem.route" routerLinkActive="active-link">
+              <mat-icon>{{ subitem.icon }}</mat-icon>
+              <span class="header-font">{{ subitem.name }}</span>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </ng-container>
+    </mat-nav-list>
+    
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<mat-drawer-container>
+  <mat-sidenav #callDrawer position="end" class="example-container2" mode="side" fixedInViewport="true" [opened]="false">
+    <div fxLayout="row" fxLayoutAlign="center center" class="control mat-elevation-z1">
+      <h2>Settings</h2>
+    </div>
+  </mat-sidenav>
+</mat-drawer-container> -->

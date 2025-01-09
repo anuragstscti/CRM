@@ -4,10 +4,8 @@ export const environment = {
     "urls": {
         "redirectUri": "http://localhost:4200",
         "authUrl": "http://localhost:4200",
-        "apiUrl": "https://dispatchmobile-dev.gtc.local:4521",
-        "apiUrl2": "https://dispatchmobile-dev.gtc.local:4521",
-        "apiUrl3": "https://dispatchmobile-dev.gtc.local:4521",
-        "apiUrl4": "https://dispatchmobile-dev.gtc.local:4521"
+        "apiUrl": "http://localhost:5500",
+    
     },
     "scopes": [
         "api://706c81e6-7135-4605-89fd-735085089960/Employee.Access.All"

@@ -1,1 +1,50 @@
-<p>callcare works!</p>
+<!-- <div class="dialer-container">
+    <h2>Phone Dialer</h2>
+  
+    <div class="input-group">
+      <mat-form-field appearance="fill" class="country-select">
+        <mat-label>Country Code</mat-label>
+        <mat-select [(ngModel)]="selectedCountryCode">
+          <mat-option *ngFor="let country of countryCodes" [value]="country.code">
+            {{ country.code }} ({{ country.name }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="phone-input">
+        <mat-label>Phone Number</mat-label>
+        <input matInput [(ngModel)]="phoneNumber" placeholder="Enter phone number" readonly />
+      </mat-form-field>
+    </div>
+  
+    <div class="keypad">
+      <div class="keypad-row">
+        <button mat-raised-button (click)="appendToPhoneNumber('1')">1</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('2')">2</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('3')">3</button>
+      </div>
+      <div class="keypad-row">
+        <button mat-raised-button (click)="appendToPhoneNumber('4')">4</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('5')">5</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('6')">6</button>
+      </div>
+      <div class="keypad-row">
+        <button mat-raised-button (click)="appendToPhoneNumber('7')">7</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('8')">8</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('9')">9</button>
+      </div>
+      <div class="keypad-row">
+        <button mat-raised-button (click)="appendToPhoneNumber('*')">*</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('0')">0</button>
+        <button mat-raised-button (click)="appendToPhoneNumber('#')">#</button>
+      </div>
+      <div class="keypad-row">
+        <button mat-raised-button (click)="backspace()">Backspace</button>
+      </div>
+    </div>
+  
+    <button mat-raised-button color="primary" (click)="dialNumber()" class="dial-button">Dial</button>
+  
+    <p *ngIf="dialedNumber" class="dialed-number">Dialing: {{ dialedNumber }}</p>
+  </div>
+   -->

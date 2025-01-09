@@ -12,6 +12,8 @@ import { CallcareComponent } from './pages/callcare/callcare.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { TicketsComponent } from './pages/tickets/tickets.component';
 import { AuthGuard } from './guard/auth.guard';
+import { UserComponent } from './pages/user/user.component';
+import { CRMuserComponent } from './pages/crmuser/crmuser.component';
 const routes: Routes = [
   {
     path: '',
@@ -34,7 +36,9 @@ const routes: Routes = [
       { path: 'form-example', component: FormExampleComponent ,canActivate:[AuthGuard]},
       { path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]},
       {path:'navigation',component:NavigationSideNavComponent,canActivate:[AuthGuard]},
-     
+      {path:'user',component:UserComponent,canActivate:[AuthGuard]},
+      {path:'customer',component:CRMuserComponent,canActivate:[AuthGuard]},
+      
       
     ]
   },

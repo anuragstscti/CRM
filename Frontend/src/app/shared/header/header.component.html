@@ -1,12 +1,12 @@
 <mat-toolbar class="mat-toolbar">
     <div class="left-content">
-        <button mat-icon-button class="whiteBg-icon" (click)="openSideNav('sidenav')">
+        <button mat-icon-button class="whiteBg-icon" (click)="openSideNav('sidenav')" matTooltip="Open Side Navigation">
             <mat-icon>format_align_left</mat-icon>
         </button>
-       <button mat-icon-button class="whiteBg-icon" (click)="openSideNav('callCare')">
+       <button mat-icon-button class="whiteBg-icon" (click)="openSideNav('callCare')" matTooltip="Open Call Care">
         <mat-icon> phone</mat-icon>
        </button>
-       <button mat-icon-button class="whiteBg-icon" (click)="logOut()">
+       <button mat-icon-button class="whiteBg-icon" (click)="logOut()" matTooltip="Log Out">
         <mat-icon> supervised_user_circle</mat-icon>
        </button>       
     </div>

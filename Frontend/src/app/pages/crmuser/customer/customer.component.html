@@ -1,0 +1,227 @@
+<div>
+  <!-- <div>
+    <form [formGroup]="mainForm" (ngSubmit)="saveUser()">
+      <fieldset>
+        <legend>General Information</legend>
+        <div style="display: flex;justify-content: space-between;">
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName" placeholder="First name">
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Middle name - optional</mat-label>
+            <input matInput formControlName="middleName" placeholder="Middle name">
+          </mat-form-field>
+        </div>
+        <div style="display: flex;justify-content: space-between;">
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Last name">
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Gender - optional</mat-label>
+            <mat-select formControlName="gender" placeholder="Gender">
+              <mat-option *ngFor="let gender of genderList" [value]="gender.id">{{gender.name}}</mat-option>
+             
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="display: flex;justify-content: space-between;">
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Party type - optional</mat-label>
+            <mat-select formControlName="partyType" placeholder="Party type">
+              <mat-option *ngFor="let parties of PartyList" [value]="parties.id">{{parties.name}}</mat-option>
+             
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Date of birth - optional</mat-label>
+            <input matInput formControlName="dateOfBirth" [matDatepicker]="picker" placeholder="YYYY/MM/DD">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div style="display: flex;justify-content: space-between;">
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Account number - optional</mat-label>
+            <input matInput formControlName="accountNumber" placeholder="Account number">
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Additional info - optional</mat-label>
+            <textarea matInput formControlName="additionalInfo" placeholder="Additional info" maxlength="1000"></textarea>
+           </mat-form-field>
+        </div>
+      </fieldset>
+    
+    
+      <fieldset>
+        <legend>Phone Numbers - optional</legend>
+        <div style="display: flex;justify-content: space-between;">
+          <div>
+            <mat-form-field appearance="outline" style="width: 28%;">
+              <mat-label>Country</mat-label>
+              <mat-select formControlName="phoneCountry">
+                <mat-option value="us">United States</mat-option>
+                <mat-option value="uk">United Kingdom</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 72%;">
+              <mat-label>Phone number</mat-label>
+              <input matInput formControlName="phoneNumber" placeholder="e.g. +15555550100">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" style="width: 28%;">
+              <mat-label>Country</mat-label>
+              <mat-select formControlName="mobileCountry">
+                <mat-option value="us">United States</mat-option>
+                <mat-option value="uk">United Kingdom</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 72%;">
+              <mat-label>Mobile phone number</mat-label>
+              <input matInput formControlName="mobilePhoneNumber" placeholder="e.g. +15555550100">
+            </mat-form-field>
+          </div>
+        </div>
+        <div style="display: flex;justify-content: space-between;">
+          <div>
+            <mat-form-field appearance="outline" style="width: 28%;">
+              <mat-label>Country</mat-label>
+              <mat-select formControlName="homeCountry">
+                <mat-option value="us">United States</mat-option>
+                <mat-option value="uk">United Kingdom</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 72%;">
+              <mat-label>Home phone number</mat-label>
+              <input matInput formControlName="homePhoneNumber" placeholder="e.g. +15555550100">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" style="width: 28%;">
+              <mat-label>Country</mat-label>
+              <mat-select formControlName="businessCountry">
+                <mat-option value="us">United States</mat-option>
+                <mat-option value="uk">United Kingdom</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 72%;">
+              <mat-label>Business phone number</mat-label>
+              <input matInput formControlName="businessPhoneNumber" placeholder="e.g. +15555550100">
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+    
+      <fieldset>
+        <legend>Emails - optional</legend>
+        <div style="display: flex;justify-content: space-between;">
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Email address</mat-label>
+            <input matInput formControlName="emailAddress" placeholder="Email address">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Business email address</mat-label>
+            <input matInput formControlName="businessEmailAddress" placeholder="Business email address">
+          </mat-form-field>  
+        </div>
+        <div>      
+          <mat-form-field appearance="outline" style="width: 48%;">
+            <mat-label>Personal email address</mat-label>
+            <input matInput formControlName="personalEmailAddress" placeholder="Personal email address">
+          </mat-form-field>
+        </div>
+      </fieldset>
+    
+    
+    <fieldset>
+      <legend>Mailing address - optional</legend>
+      <div style="display: flex;justify-content: space-between;">
+        <mat-form-field appearance="outline" style="width: 48%;">
+          <mat-label>Street Address</mat-label>
+          <input matInput formControlName="streetAddress" placeholder="Street Address">
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" style="width: 48%;">
+          <mat-label>Apt, Suite, etc.</mat-label>
+          <input matInput formControlName="aptSuite" placeholder="Apt, Suite, etc.">
+        </mat-form-field>
+      </div>
+    
+      <div style="display: flex;justify-content: space-between;">
+      <mat-form-field appearance="outline" style="width: 48%;">
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline" style="width: 48%;">
+        <mat-label>Postal Code</mat-label>
+        <input matInput formControlName="postalCode" placeholder="Postal Code">
+      </mat-form-field>
+      </div>
+    
+      <div style="display: flex;justify-content: space-between;">
+      <mat-form-field appearance="outline" style="width: 48%;">
+        <mat-label>State/Province</mat-label>
+        <mat-select formControlName="stateProvince">
+          <mat-option *ngFor="let state of states" [value]="state.code">{{ state.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline" style="width: 48%;">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" placeholder="City">
+      </mat-form-field>
+      </div>
+    
+    </fieldset>
+    
+    <div style="display: flex;justify-content: flex-end;">
+      <button mat-flat-button type="submit" color="primary">save
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </form>
+  </div> -->
+
+
+
+  <div>
+    <div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> First-Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="phoneNumber">
+          <th mat-header-cell *matHeaderCellDef> Phone-Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="emailAddress">
+          <th mat-header-cell *matHeaderCellDef> Email-Address </th>
+          <td mat-cell *matCellDef="let element"> {{element.emailAddress}} </td>
+        </ng-container>
+        <ng-container matColumnDef="accountNumber">
+          <th mat-header-cell *matHeaderCellDef> Account-Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.accountNumber}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="resultLenght" [pageSize]="pageSize"
+      showFirstLastButtons
+      (page)="getDatas($event)">
+  </mat-paginator>
+    </div>
+  </div>
+</div>

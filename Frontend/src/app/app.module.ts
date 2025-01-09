@@ -32,6 +32,15 @@ import { PagesComponent } from './pages/pages.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './guard/auth.guard';
+import { AmazonConnectService } from './amazon-connect/amazon.service';
+import { UserComponent } from './pages/user/user.component';
+import { CallcareComponent } from './pages/callcare/callcare.component';
+import { CRMuserComponent } from './pages/crmuser/crmuser.component';
+import { CustomerComponent } from './pages/crmuser/customer/customer.component';
+import { CasesComponent } from './pages/crmuser/cases/cases.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +50,12 @@ import { AuthGuard } from './guard/auth.guard';
     PageNotFoundComponent,
     HomePageComponent,
     AesHomePageComponent,
+    UserComponent,
+    CallcareComponent,
+    CRMuserComponent,
+    CustomerComponent,
+    CasesComponent
+
   ],
   imports: [
     BrowserModule,
@@ -49,6 +64,10 @@ import { AuthGuard } from './guard/auth.guard';
     HttpClientModule,
     SharedModule,
     MatSidenavModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginator,
+    MatPaginatorModule,
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
@@ -76,7 +95,7 @@ import { AuthGuard } from './guard/auth.guard';
   exports: [
     MatSortModule
   ],
-  providers:[AuthGuard],
+  providers:[AuthGuard,AmazonConnectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

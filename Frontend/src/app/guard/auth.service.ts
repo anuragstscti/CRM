@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:44342/api/Auth'; // Replace with your actual API URL
+  private apiUrl = 'http://localhost:5500/api/Auth'; // Replace with your actual API URL
   private tokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor(private http: HttpClient) {}

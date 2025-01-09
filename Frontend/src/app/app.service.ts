@@ -77,9 +77,9 @@ export class AppService {
 
   protected get requestHeaders(): { headers: HttpHeaders | { [header: string]: string | string[]; } } {
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + JSON.parse(localStorage['authToken'] ?? '{}').accessToken,
+      'Authorization': 'Bearer ' + localStorage['authToken'] ?? '{}',
       'Accept': 'application/json, text/plain, */*',
-      'sessionId': JSON.parse(localStorage['authToken'] ?? '{}').sessionId ?? 0,
+      // 'sessionId': JSON.parse(localStorage['authToken'] ?? '{}').sessionId ?? 0,
       'Content-Type': 'application/json'
     });
 

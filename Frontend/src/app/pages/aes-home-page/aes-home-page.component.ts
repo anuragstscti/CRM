@@ -32,42 +32,57 @@ export class AesHomePageComponent {
   constructor(public router: Router,
     public authService:AuthService,
     public commonServices: AppService, public headerService: HeaderService, public alertServices: AlertService) { 
-this.commonServices.sideNavToggle$.subscribe(res=>{
-this.result = res
-if(this.result.callCare == 'sidenav' && this.result.isToggled){
-  this.drawer?.open()
-  this.callDrawer?.close()
-}if(this.result.callCare == 'sidenav' && !this.result.isToggled){
-  this.drawer?.close()
-}
- if(this.result.callCare == 'callCare' && this.result.isToggled ){
-  this.drawer?.open()
-  this.callDrawer?.open()
-}
-if(this.result.callCare == 'callCare' && !this.result.isToggled ){
-  this.drawer?.open()
-  this.callDrawer?.close()
-}
-})
+    this.commonServices.sideNavToggle$.subscribe(res=>{
+    this.result = res
+    if(this.result.callCare == 'sidenav' && this.result.isToggled){
+      this.drawer?.open()
+      this.callDrawer?.close()
+    }if(this.result.callCare == 'sidenav' && !this.result.isToggled){
+      this.drawer?.close()
+    }
+    if(this.result.callCare == 'callCare' && this.result.isToggled ){
+      this.drawer?.open()
+      this.callDrawer?.open()
+    }
+    if(this.result.callCare == 'callCare' && !this.result.isToggled ){
+      this.drawer?.open()
+      this.callDrawer?.close()
+    }
+    })
+  }
+  countryCodes: { code: string, name: string }[] = [
+    { code: '+1', name: 'USA' },
+    { code: '+44', name: 'UK' },
+    { code: '+91', name: 'India' },
+    { code: '+61', name: 'Australia' },
+    { code: '+33', name: 'France' }
+  ];
 
+  selectedCountryCode: string = '+1'; // Default country code (USA)
+  phoneNumber: string = '';  // User input for phone number
+  dialedNumber: string | null = null;
 
+  // Add a digit to the phone number
+  appendToPhoneNumber(digit: string) {
+    this.phoneNumber += digit;
+  }
+
+  // Remove last digit from phone number
+  backspace() {
+    this.phoneNumber = this.phoneNumber.slice(0, -1);
+  }
+
+  // Handle the dial button click
+  dialNumber() {
+    if (!this.phoneNumber.trim()) {
+      alert('Please enter a phone number.');
+      return;
+    }
+    this.dialedNumber = this.selectedCountryCode + this.phoneNumber;
+    console.log('Dialing:', this.dialedNumber);
   }
   ngOnInit() {
-    this.flag = false;
-    // this.authData = JSON.parse(localStorage.getItem('authToken') || '{}').userDetails;
-    // this.subscription = this.commonServices.get('menuservice/menus/user/' + 'uqed').subscribe({
-    //   next: (res: any) => {
-    //     this.applicationList = res;
-    //     this.headerService.sendDateDatas(false);
-    //   },
-    //   error: (err: any) => {
-    //     if (err.error) {
-    //       this.alertServices.error(err?.error?.error ?? 'Oops! Something went wrong. Please contact support if the issue persists.');
-    //     } else {
-    //       this.commonServices.sendErrorMessage(err.status.toString());
-    //     }
-    //   }
-    // })
+    this.flag = false;   
   }
 
 
@@ -93,19 +108,16 @@ if(this.result.callCare == 'callCare' && !this.result.isToggled ){
     }
   }
 
-  ngOnDestroy() {
-    this.menuHeader = 'AES Main Menus'
+  ngOnDestroy() {   
     if (this.subscription) {
       this.subscription.unsubscribe();
-
     }
   }
+
   close() {
     this.selectedParent = null;
     this.menuHeader = 'AES Main Menus'
-  }
-
- 
+  } 
 
   logout(): void {
     this.authService.logout();
